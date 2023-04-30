@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import mongoose, { ConnectOptions } from "mongoose";
-import session, { Session } from 'express-session'
 import { config } from "dotenv";
 import Todo from "./model/Todo"
 import User from "./model/User"
@@ -8,15 +7,6 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors');
 const app = express();
 const PORT = 5000;
-const jwt = require('jsonwebtoken')
-
-const KEY = 'asasdlfkjhakdfjhslkjdf';
-
-declare module 'express-session' {
-  interface Session {
-    userEmail: string;
-  }
-}
 
 config({ path: "./.env" })
 
@@ -24,11 +14,6 @@ app.use(cors({
   origin: 'http://localhost:3000',
   credentials: true
 }))
-app.use(session({
-  secret: 'keyboat-cat',
-  resave: false,
-  saveUninitialized: false
-}));
 app.use(express.json())
 app.use(cookieParser())
 
